@@ -2,12 +2,15 @@ package br.com.mmmsieto.tasks.controller;
 
 import br.com.mmmsieto.tasks.controller.converter.TaskResponseConverter;
 import br.com.mmmsieto.tasks.controller.dtos.response.TaskResponse;
+import br.com.mmmsieto.tasks.controller.filter.TaskFilter;
 import br.com.mmmsieto.tasks.model.Task;
 import br.com.mmmsieto.tasks.service.TaskService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
@@ -23,9 +26,10 @@ public class TaskController {
     }
 
     @GetMapping
-    public Mono<List<TaskResponse>> getTasks() {
-        return taskService.list()
-                .map(converter::convertList);
+    public Page<TaskResponse> getTasks(@ModelAttribute TaskFilter taskFilter,
+                                        @PageableDefault(page = 0, size = 3,  sort = "title,asc")Pageable pageable) {
+        return taskService.findPaginated(taskFilter, pageable)
+                .map(converter::convert);
     }
 
     @PostMapping

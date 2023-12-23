@@ -1,13 +1,23 @@
 package br.com.mmmsieto.tasks.controller.dtos.response;
 
 import br.com.mmmsieto.tasks.model.enums.TaskSatatus;
+import org.bson.types.ObjectId;
 
 public class TaskResponse {
 
+    private ObjectId id;
     private String title;
     private String description;
     private int priority;
     private TaskSatatus status;
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

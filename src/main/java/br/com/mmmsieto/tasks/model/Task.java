@@ -3,7 +3,6 @@ package br.com.mmmsieto.tasks.model;
 import br.com.mmmsieto.tasks.model.enums.TaskSatatus;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.annotation.Collation;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "task")
@@ -20,8 +19,9 @@ public class Task {
 
     private TaskSatatus status;
 
-    private Task() {
+    public Task() {
     }
+
 
     public Task(String title, String description, int priority, TaskSatatus status) {
         this.title = title;
@@ -93,6 +93,8 @@ public class Task {
     }
 
     public static class Builder {
+
+        private ObjectId id;
         private String title;
         private String description;
         private int priority;
@@ -106,6 +108,11 @@ public class Task {
             this.description = task.getDescription();
             this.priority = task.getPriority();
             this.status = task.getStatus();
+        }
+
+        public Builder id(ObjectId id) {
+            this.id = id;
+            return this;
         }
 
         public Builder title(String title) {

@@ -20,6 +20,7 @@ public class TaskResponseConverter {
         return Optional.ofNullable(task)
                 .map(t -> {
                     TaskResponse response = new TaskResponse();
+                    response.setId(t.getId());
                     response.setTitle(t.getTitle());
                     response.setDescription(t.getDescription());
                     response.setPriority(t.getPriority());
@@ -33,6 +34,7 @@ public class TaskResponseConverter {
         return Optional.ofNullable(response)
                 .map(r -> {
                     Task task = new Task.Builder()
+                            .id(r.getId())
                             .title(r.getTitle())
                             .description(r.getDescription())
                             .priority(r.getPriority())
@@ -42,5 +44,6 @@ public class TaskResponseConverter {
                 })
                 .orElse(null);
     }
+
 
 }
