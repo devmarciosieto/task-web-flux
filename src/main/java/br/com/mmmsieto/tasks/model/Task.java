@@ -1,9 +1,12 @@
 package br.com.mmmsieto.tasks.model;
 
 import br.com.mmmsieto.tasks.model.enums.TaskSatatus;
-import br.com.mmmsieto.tasks.service.TaskService;
+import org.springframework.data.annotation.Id;
 
 public class Task {
+
+    @Id
+    private String id;
 
     private String title;
 
@@ -38,9 +41,13 @@ public class Task {
         return new Builder(task);
     }
 
-    public Task newTask() {
-        TaskService.taskList.add(this);
-        return this;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {

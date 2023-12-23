@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/tasks")
 public class TaskController {
 
-    private final TaskService  taskService;
+    private final TaskService taskService;
 
     private final TaskResponseConverter converter;
 
