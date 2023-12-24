@@ -4,9 +4,9 @@ import br.com.mmmsieto.tasks.controller.filter.TaskFilter;
 import br.com.mmmsieto.tasks.model.Task;
 import br.com.mmmsieto.tasks.repository.TaskCustomRepository;
 import br.com.mmmsieto.tasks.repository.TaskRepository;
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -41,5 +41,9 @@ public class TaskService {
 
     public Page<Task> findPaginated(TaskFilter taskFilter, Pageable pageable) {
         return taskCustomRepository.findPaginated(taskFilter, pageable);
+    }
+
+    public Mono<Void> deleteById(ObjectId id) {
+        return Mono.fromRunnable(() -> taskRepository.deleteById(id));
     }
 }

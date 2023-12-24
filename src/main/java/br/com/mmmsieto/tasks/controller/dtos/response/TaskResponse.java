@@ -5,17 +5,17 @@ import org.bson.types.ObjectId;
 
 public class TaskResponse {
 
-    private ObjectId id;
+    private String id;
     private String title;
     private String description;
     private int priority;
     private TaskSatatus status;
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 

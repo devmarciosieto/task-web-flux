@@ -1,5 +1,6 @@
 package br.com.mmmsieto.tasks.controller.converter;
 
+import br.com.mmmsieto.tasks.controller.dtos.request.TaskRequest;
 import br.com.mmmsieto.tasks.controller.dtos.response.TaskResponse;
 import br.com.mmmsieto.tasks.model.Task;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,7 @@ public class TaskResponseConverter {
         return Optional.ofNullable(task)
                 .map(t -> {
                     TaskResponse response = new TaskResponse();
-                    response.setId(t.getId());
+                    response.setId(t.getId().toString());
                     response.setTitle(t.getTitle());
                     response.setDescription(t.getDescription());
                     response.setPriority(t.getPriority());
@@ -30,20 +31,17 @@ public class TaskResponseConverter {
                 .orElse(null);
     }
 
-    public Task convert(TaskResponse response) {
-        return Optional.ofNullable(response)
+    public static Task convert(TaskRequest request) {
+        return Optional.ofNullable(request)
                 .map(r -> {
                     Task task = new Task.Builder()
-                            .id(r.getId())
                             .title(r.getTitle())
                             .description(r.getDescription())
                             .priority(r.getPriority())
-                            .status(r.getStatus())
                             .build();
                     return task;
                 })
                 .orElse(null);
     }
-
 
 }

@@ -1,12 +1,14 @@
 package br.com.mmmsieto.tasks.controller;
 
 import br.com.mmmsieto.tasks.controller.converter.TaskResponseConverter;
+import br.com.mmmsieto.tasks.controller.dtos.request.TaskRequest;
 import br.com.mmmsieto.tasks.controller.dtos.response.TaskResponse;
 import br.com.mmmsieto.tasks.controller.filter.TaskFilter;
-import br.com.mmmsieto.tasks.model.Task;
 import br.com.mmmsieto.tasks.service.TaskService;
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import org.springframework.data.domain.Pageable;
@@ -33,9 +35,16 @@ public class TaskController {
     }
 
     @PostMapping
-    public Mono<TaskResponse> createTask(@RequestBody Task task) {
-        return taskService.insertTask(task)
+    public Mono<TaskResponse> createTask(@RequestBody TaskRequest request) {
+        return taskService.insertTask(converter.convert(request))
                 .map(converter::convert);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Mono<Void> deleteTask(@PathVariable ObjectId id) {
+        return Mono.just(id)
+                .flatMap(taskService::deleteById);
     }
 
 }
