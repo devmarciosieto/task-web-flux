@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class TaskResponseConverter {
+public class TaskConverter {
 
     public List<TaskResponse> convertList(List<Task> tasks) {
         return Optional.ofNullable(tasks)

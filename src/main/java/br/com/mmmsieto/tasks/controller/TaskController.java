@@ -1,6 +1,6 @@
 package br.com.mmmsieto.tasks.controller;
 
-import br.com.mmmsieto.tasks.controller.converter.TaskResponseConverter;
+import br.com.mmmsieto.tasks.controller.converter.TaskConverter;
 import br.com.mmmsieto.tasks.controller.dtos.request.TaskRequest;
 import br.com.mmmsieto.tasks.controller.dtos.response.TaskResponse;
 import br.com.mmmsieto.tasks.controller.filter.TaskFilter;
@@ -20,9 +20,9 @@ public class TaskController {
 
     private final TaskService taskService;
 
-    private final TaskResponseConverter converter;
+    private final TaskConverter converter;
 
-    public TaskController(TaskService taskService, TaskResponseConverter converter) {
+    public TaskController(TaskService taskService, TaskConverter converter) {
         this.taskService = taskService;
         this.converter = converter;
     }
