@@ -2,10 +2,7 @@ package br.com.mmmsieto.tasks.repository;
 
 import br.com.mmmsieto.tasks.controller.filter.TaskFilter;
 import br.com.mmmsieto.tasks.model.Task;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -21,15 +18,16 @@ public class TaskCustomRepository {
     public TaskCustomRepository(MongoOperations mongoOperations) {
         this.mongoOperations = mongoOperations;
     }
+    public Page<Task> findPaginated(TaskFilter filter, int page, int size) {
 
-    public Page<Task> findPaginated(TaskFilter filter, Pageable pageable) {
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.by("title").ascending());
 
         Task task = new Task();
 
         task.setTitle(filter.getTitle());
 
         ExampleMatcher matcher = ExampleMatcher.matching()
-            .withIgnorePaths("priority", "status");
+                .withIgnorePaths("priority", "status");
 
         Example<Task> example = Example.of(task, matcher);
 

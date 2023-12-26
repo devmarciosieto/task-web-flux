@@ -6,13 +6,11 @@ import br.com.mmmsieto.tasks.controller.dtos.response.TaskResponse;
 import br.com.mmmsieto.tasks.controller.filter.TaskFilter;
 import br.com.mmmsieto.tasks.service.TaskService;
 import org.bson.types.ObjectId;
-import org.springframework.data.domain.Page;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
-import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
@@ -27,11 +25,14 @@ public class TaskController {
         this.converter = converter;
     }
 
+    // TODO: remover o retorno do list
     @GetMapping
-    public Page<TaskResponse> getTasks(@ModelAttribute TaskFilter taskFilter,
-                                        @PageableDefault(page = 0, size = 3,  sort = "title,asc")Pageable pageable) {
-        return taskService.findPaginated(taskFilter, pageable)
-                .map(converter::convert);
+    public List<TaskResponse> getTasks(@ModelAttribute TaskFilter taskFilter,
+                                        @RequestParam(value = "page", defaultValue = "0") int page,
+                                        @RequestParam(value = "size", defaultValue = "3") int size) {
+
+        return taskService.findList(taskFilter, page, size)
+                .stream().map(converter::convert).toList();
     }
 
     @PostMapping
