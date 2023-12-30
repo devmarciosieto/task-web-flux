@@ -31,6 +31,7 @@ public class Task {
     }
 
     public Task(Builder builder) {
+        this.id = builder.id;
         this.title = builder.title;
         this.description = builder.description;
         this.priority = builder.priority;
@@ -104,6 +105,7 @@ public class Task {
         }
 
         public Builder(Task task) {
+            this.id = task.getId();
             this.title = task.getTitle();
             this.description = task.getDescription();
             this.priority = task.getPriority();
