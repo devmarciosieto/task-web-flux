@@ -3,7 +3,6 @@ package br.com.mmmsieto.tasks.controller.converter;
 import br.com.mmmsieto.tasks.controller.dtos.request.TaskRequest;
 import br.com.mmmsieto.tasks.controller.dtos.response.TaskResponse;
 import br.com.mmmsieto.tasks.model.Task;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +11,8 @@ import java.util.List;
 
 import static br.com.mmmsieto.tasks.utils.TestUtils.buildValidTask;
 import static br.com.mmmsieto.tasks.utils.TestUtils.createTaskRequest;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class TaskConverterTest {

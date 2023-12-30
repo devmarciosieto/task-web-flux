@@ -2,6 +2,7 @@ package br.com.mmmsieto.tasks.utils;
 
 import br.com.mmmsieto.tasks.controller.dtos.request.TaskRequest;
 import br.com.mmmsieto.tasks.controller.dtos.response.TaskResponse;
+import br.com.mmmsieto.tasks.controller.filter.TaskFilter;
 import br.com.mmmsieto.tasks.model.Task;
 import br.com.mmmsieto.tasks.model.enums.TaskSatatus;
 import org.bson.types.ObjectId;
@@ -9,7 +10,7 @@ import org.bson.types.ObjectId;
 public class TestUtils {
 
     public static Task buildValidTask() {
-        return  Task.builder()
+        return Task.builder()
                 .id(ObjectId.get())
                 .title("title")
                 .description("description")
@@ -34,6 +35,14 @@ public class TestUtils {
         taskResponse.setPriority(1);
         taskResponse.setStatus(TaskSatatus.INSERT);
         return taskResponse;
+    }
+
+    public static TaskFilter createTaskFilter() {
+        TaskFilter taskFilter = new TaskFilter();
+        taskFilter.setTitle("title");
+        taskFilter.setDescription("description");
+        taskFilter.setPriority(1);
+        return taskFilter;
     }
 
 }

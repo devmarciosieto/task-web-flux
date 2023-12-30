@@ -28,8 +28,8 @@ public class TaskController {
     // TODO: remover o retorno do list
     @GetMapping
     public List<TaskResponse> getTasks(@ModelAttribute TaskFilter taskFilter,
-                                        @RequestParam(value = "page", defaultValue = "0") int page,
-                                        @RequestParam(value = "size", defaultValue = "3") int size) {
+                                       @RequestParam(value = "page", defaultValue = "0") int page,
+                                       @RequestParam(value = "size", defaultValue = "3") int size) {
 
         return taskService.findList(taskFilter, page, size)
                 .stream().map(converter::convert).toList();

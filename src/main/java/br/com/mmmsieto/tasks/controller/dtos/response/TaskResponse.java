@@ -1,7 +1,6 @@
 package br.com.mmmsieto.tasks.controller.dtos.response;
 
 import br.com.mmmsieto.tasks.model.enums.TaskSatatus;
-import org.bson.types.ObjectId;
 
 public class TaskResponse {
 

@@ -17,7 +17,7 @@ public class TaskService {
     private final TaskCustomRepository taskCustomRepository;
 
     public TaskService(TaskRepository taskRepository,
-                        TaskCustomRepository taskCustomRepository) {
+                       TaskCustomRepository taskCustomRepository) {
         this.taskRepository = taskRepository;
         this.taskCustomRepository = taskCustomRepository;
     }
