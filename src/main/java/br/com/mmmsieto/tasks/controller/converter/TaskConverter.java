@@ -21,7 +21,7 @@ public class TaskConverter {
         return Optional.ofNullable(task)
                 .map(t -> {
                     TaskResponse response = new TaskResponse();
-                    response.setId(t.getId().toString());
+                    response.setId(t.getId() != null ? t.getId().toString() : null);
                     response.setTitle(t.getTitle());
                     response.setDescription(t.getDescription());
                     response.setPriority(t.getPriority());
